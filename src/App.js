@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './assets/css/App.css';
+
+import Home from './components/Common/Home';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            梦想开始的地方...
-          </p>
-        </header>
+        <Home></Home>
       </div>
     );
   }
