@@ -305,6 +305,13 @@ module.exports = {
                     },
                   },
                 ],
+                  [
+                      "import",
+                      {
+                          libraryName: "antd",
+                          style: 'css'
+                      }
+                  ] // `style: true` 会加载 less 文件
               ],
               cacheDirectory: true,
               // Save disk space when time isn't as important
@@ -344,19 +351,24 @@ module.exports = {
           // `MiniCSSExtractPlugin` extracts styles into CSS
           // files. If you use code splitting, async bundles will have their own separate CSS chunk file.
           // By default we support CSS Modules with the extension .module.css
-          {
-            test: cssRegex,
-            exclude: cssModuleRegex,
-            loader: getStyleLoaders({
-              importLoaders: 1,
-              sourceMap: shouldUseSourceMap,
-            }),
-            // Don't consider CSS imports dead code even if the
-            // containing package claims to have no side effects.
-            // Remove this when webpack adds a warning or an error for this.
-            // See https://github.com/webpack/webpack/issues/6571
-            sideEffects: true,
-          },
+            {
+                test: cssRegex,
+                include: /node_modules|antd\.css/,
+                use: getStyleLoaders({
+                    importLoaders: 1
+                    // modules: true,
+                    // localIdentName: '[name]__[local]__[hash:base64:5]'
+                })
+            },
+            {
+                test: cssRegex,
+                exclude: /node_modules|antd\.css/,
+                use: getStyleLoaders({
+                    importLoaders: 1,
+                    modules: true,
+                    localIdentName: "[name]__[local]__[hash:base64:5]"
+                })
+            },
           // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
           // using the extension .module.css
           {
