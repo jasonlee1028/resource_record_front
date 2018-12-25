@@ -376,7 +376,7 @@ module.exports = {
             loader: getStyleLoaders({
               importLoaders: 1,
               sourceMap: shouldUseSourceMap,
-              modules: true,
+              // modules: true,
               getLocalIdent: getCSSModuleLocalIdent,
             }),
           },
