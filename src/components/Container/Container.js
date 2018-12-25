@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Layout} from 'antd';
 
 import JHeader from '../Layout/JHeader';
@@ -9,8 +9,6 @@ import Routes from "../../routes/Routes";
 const {
     Content,
 } = Layout;
-
-
 
 export default class Container extends React.Component {
 

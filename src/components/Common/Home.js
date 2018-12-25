@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react';
+import suzy from '../../assets/images/suzy.jpg';
 
-export default class Home extends React.Component {
-
+class Home extends Component {
     render() {
         return (
-            <div style={{padding: 24, background: '#fff', textAlign: 'center'}}>
-                网站首页：梦想开始的地方...
+            <div>
+                <img src={suzy}/>
             </div>
         );
     }
-};
+}
+
+export default Home;
