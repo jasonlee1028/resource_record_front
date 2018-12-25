@@ -6,13 +6,14 @@ import {
 } from 'react-router-dom';
 
 import './assets/css/index.css';
-import App from './App';
+
+import Container from './components/Container/Container';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <Router>
         <Switch>
-            <App />
+            <Container />
         </Switch>
     </Router>,
     document.getElementById('root'));

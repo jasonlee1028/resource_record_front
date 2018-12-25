@@ -1,31 +1,12 @@
 import React from 'react'
-import {Layout} from 'antd';
-
-import JHeader from '../Layout/JHeader';
-import JSider from '../Layout/JSider';
-import JFooter from '../Layout/JFooter';
-import Routes from "../../routes/Routes";
-
-const {
-     Content,
-} = Layout;
-
-
 
 export default class Home extends React.Component {
 
     render() {
         return (
-            <Layout>
-                <JSider></JSider>
-                <Layout style={{marginLeft: 200}}>
-                    <JHeader></JHeader>
-                    <Content style={{margin: '24px 16px 0', overflow: 'initial'}}>
-                        <Routes />
-                    </Content>
-                    <JFooter></JFooter>
-                </Layout>
-            </Layout>
+            <div style={{padding: 24, background: '#fff', textAlign: 'center'}}>
+                网站首页：梦想开始的地方...
+            </div>
         );
     }
 };
