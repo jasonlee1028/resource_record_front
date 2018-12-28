@@ -1,62 +1,41 @@
 import React, {Component} from 'react';
-import {Card} from 'antd';
-import {Link} from "react-router-dom";
+import {Card, Spin} from 'antd';
+import {Link, withRouter} from "react-router-dom";
 
+import {setStore} from '../../api/util';
 import {compose, graphql, withApollo} from 'react-apollo';
 import {resourceCategory} from '../../api/graphql/WebResource.graphql';
 
 class ResourceCategory extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            resourceCategoryList: [
-                {
-                    id: 0,
-                    name: "r0",
-                    displayName: "全部",
-                    url: "/NetResourceItem"
-                },
-                {
-                    id: 1,
-                    name: "r1",
-                    displayName: "Python资源",
-                    url: "/NetResourceItem"
-                },
-                {
-                    id: 2,
-                    name: "r2",
-                    displayName: "前端资源",
-                    url: "/NetResourceItem"
-                },
-                {
-                    id: 3,
-                    name: "r3",
-                    displayName: "分布式资源",
-                    url: "/NetResourceItem"
-                },
-            ]
-        }
     }
 
-    componentWillMount() {
-        console.log('====')
-    }
+    handleClickResourceCategory = (categoryId) => {
+        this.props.history.push({
+            pathname: `/NetResourceItem/${categoryId}`
+        });
+        setStore('categoryId', categoryId);
+    };
 
     render() {
-        console.log(this.props.data);
+        if (this.props.data.error) return null;
+        if (this.props.data.loading) return <Spin/>;
+
+        let resourceCategoryList = this.props.data.resourceCategory;
+
         return (
-            <div style={{display: 'flex'}}>
-                {this.state.resourceCategoryList.map((value, key) => {
+            <div style={{display: 'inline'}}>
+                {resourceCategoryList.map((value, key) => {
                     return (
-                        <Card style={{width: 240, margin: 16}} bodyStyle={{padding: 0}}>
+                        <Card style={{width: 240, margin: 16, float: 'left'}} bodyStyle={{padding: 0}}>
                             <div className="custom-image">
                                 <img alt="example" width="100%"
                                      src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
                             </div>
                             <div className="custom-card">
                                 <h3>{value.displayName}</h3>
-                                <Link to={value.url}>点我呀</Link>
+                                <span onClick={() => this.handleClickResourceCategory(value.id)}>点我呀</span>
                             </div>
                         </Card>
                     )
@@ -73,4 +52,4 @@ export default compose(
             return {};
         }
     })
-)(ResourceCategory);
+)(withRouter(ResourceCategory));

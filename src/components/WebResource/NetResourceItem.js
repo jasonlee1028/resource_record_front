@@ -1,46 +1,51 @@
 import React from 'react';
-import {Card} from 'antd';
+import {Card, Input, DatePicker, Spin} from 'antd';
+
+import {compose, graphql, withApollo} from 'react-apollo';
 
 import '../../assets/css/ResourceItemCard.css';
-import NetResourceFilter from "../Filters/NetResourceFilter";
 
-export default class NetResourceItem extends React.Component {
+import {getStore} from '../../api/util';
+
+import {netResource} from '../../api/graphql/WebResource.graphql';
+
+let paramsSearch = {
+    categoryId: getStore("categoryId"),
+    startTime: "",
+    endTime: "",
+    keyWord: ""
+};
+
+class NetResourceItem extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            resourceList: [
-                {
-                    id: 1,
-                    name: "r1",
-                    displayName: "Requests: 让 HTTP 服务人类",
-                    url: "http://docs.python-requests.org/zh_CN/latest/index.html",
-                    description: "Python的HTTP请求库"
-                },
-                {
-                    id: 2,
-                    name: "r2",
-                    displayName: "Python 并行分布式框架 Celery",
-                    url: "https://blog.csdn.net/freeking101/article/details/74707619",
-                    description: "Python分布式计算框架"
-                },
-                {
-                    id: 3,
-                    name: "r3",
-                    displayName: "Welcome to InfluxDB’s documentation!",
-                    url: "https://influxdb-python.readthedocs.io/en/latest/",
-                    description: "Python操作InfluxDB的库"
-                },
-            ]
-        }
     }
 
     render() {
+        const Search = Input.Search;
+
+        const {RangePicker} = DatePicker;
+
+        if (this.props.data.error) return null;
+        if (this.props.data.loading) return <Spin/>;
+
+        let netResourceList = this.props.data.netResource;
+
         return (
             <div>
-                <NetResourceFilter></NetResourceFilter>
+                <span style={{padding: 16}}>起始日期:
+                 <RangePicker style={{padding: 8}} onChange={this.onChange}/>
+                </span>
+                <span style={{padding: 16}}>资源搜索:
+                <Search
+                    placeholder="Python"
+                    style={{padding: 8, width: 200}}
+                    onSearch={value => console.log(value)}
+                />
+                </span>
                 <div style={{display: 'flex'}}>
-                    {this.state.resourceList.map((value, key) => {
+                    {
+                        netResourceList.map((value, key) => {
                         return (
                             <Card
                                 title={value.displayName}
@@ -55,4 +60,16 @@ export default class NetResourceItem extends React.Component {
             </div>
         );
     }
-};
+}
+;
+
+export default compose(
+    withApollo,
+    graphql(netResource, {
+        options: props => {
+            return {
+                variables: {...paramsSearch}
+            }
+        }
+    })
+)(NetResourceItem);

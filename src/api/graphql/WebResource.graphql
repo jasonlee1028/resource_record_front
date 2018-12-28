@@ -7,3 +7,23 @@ query resourceCategory {
         description
     }
 }
+
+# 资源详情
+query netResource(
+    $categoryId: String!
+    $startTime: String
+    $endTime: String
+    $keyWord: String
+) {
+    netResource(
+        categoryId: $categoryId
+        startTime: $startTime
+        endTime: $endTime
+        keyWord: $keyWord
+    ) {
+        id
+        displayName
+        description
+        url
+    }
+}

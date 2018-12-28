@@ -2,6 +2,7 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 
 import Home from '../components/Common/Home';
+import About from '../components/Common/About';
 
 import NetResource from '../components/WebResource/NetResource';
 import Original from '../components/WebResource/Original';
@@ -14,7 +15,8 @@ const routes = () => (
         <Route path="/NetResource" component={NetResource}/>
         <Route path="/Original" component={Original}/>
         <Route path="/ResourceStatistics" component={ResourceStatistics}/>
-        <Route path="/NetResourceItem" component={NetResourceItem}/>
+        <Route path="/NetResourceItem/:id" component={NetResourceItem}/>
+        <Route path="/About" component={About}/>
     </div>
 );
 
