@@ -1,0 +1,9 @@
+# 资源类型
+query resourceCategory {
+    resourceCategory {
+        id
+        name
+        displayName
+        description
+    }
+}

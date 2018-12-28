@@ -361,6 +361,11 @@ module.exports = {
                 })
             },
             {
+                test: /\.(graphql|gql)$/,
+                exclude: /node_modules/,
+                loader: 'graphql-tag/loader'
+            },
+            {
                 test: cssRegex,
                 exclude: /node_modules|antd\.css/,
                 use: getStyleLoaders({

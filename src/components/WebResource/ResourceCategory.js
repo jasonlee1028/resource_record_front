@@ -1,45 +1,76 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import {Card} from 'antd';
+import {Link} from "react-router-dom";
+
+import {compose, graphql, withApollo} from 'react-apollo';
+import {resourceCategory} from '../../api/graphql/WebResource.graphql';
 
 class ResourceCategory extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
-            category: []
+            resourceCategoryList: [
+                {
+                    id: 0,
+                    name: "r0",
+                    displayName: "全部",
+                    url: "/NetResourceItem"
+                },
+                {
+                    id: 1,
+                    name: "r1",
+                    displayName: "Python资源",
+                    url: "/NetResourceItem"
+                },
+                {
+                    id: 2,
+                    name: "r2",
+                    displayName: "前端资源",
+                    url: "/NetResourceItem"
+                },
+                {
+                    id: 3,
+                    name: "r3",
+                    displayName: "分布式资源",
+                    url: "/NetResourceItem"
+                },
+            ]
         }
     }
 
     componentWillMount() {
-        this.setState({
-            category: [
-                {
-                    id: 1,
-                    name: "c1",
-                    displayName: "类型一"
-                },
-                {
-                    id: 2,
-                    name: "c1",
-                    displayName: "类型二"
-                },
-                {
-                    id: 3,
-                    name: "c1",
-                    displayName: "类型三"
-                },
-            ]
-        })
+        console.log('====')
     }
 
     render() {
+        console.log(this.props.data);
         return (
-            <div>
-                {this.state.category.map((value, key) => {
-                    return <li key={key}>{value.displayName}</li>
+            <div style={{display: 'flex'}}>
+                {this.state.resourceCategoryList.map((value, key) => {
+                    return (
+                        <Card style={{width: 240, margin: 16}} bodyStyle={{padding: 0}}>
+                            <div className="custom-image">
+                                <img alt="example" width="100%"
+                                     src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
+                            </div>
+                            <div className="custom-card">
+                                <h3>{value.displayName}</h3>
+                                <Link to={value.url}>点我呀</Link>
+                            </div>
+                        </Card>
+                    )
                 })}
             </div>
         );
     }
-}
+};
 
-export default ResourceCategory;
+export default compose(
+    withApollo,
+    graphql(resourceCategory, {
+        options: props => {
+            return {};
+        }
+    })
+)(ResourceCategory);

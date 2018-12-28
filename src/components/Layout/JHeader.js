@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
-import {Layout, Carousel} from 'antd';
+import {Layout} from 'antd';
+
+import '../../assets/css/Header.css';
 
 const {
     Header
@@ -9,7 +11,7 @@ export default class JHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            slogan: ["梦", "想", "开", "始", "的", "地", "方"]
+            slogan: "Stay hungry, Stay foolish!"
         }
     }
 
@@ -18,14 +20,10 @@ export default class JHeader extends Component {
             <Header style={
                 {
                     background: '#fff',
-                    padding: 16,
+                    padding: 4,
                     textAlign: 'center',
                 }}>
-                <Carousel autoplay>
-                    {this.state.slogan.map((value, key) => {
-                        return <div><h2>{value}</h2></div>
-                    })}
-                </Carousel>
+                <span className="slogan">{this.state.slogan}</span>
             </Header>
         );
     }

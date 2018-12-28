@@ -8,14 +8,18 @@ import {
 import './assets/css/index.css';
 
 import Container from './components/Container/Container';
+import RootApolloProvider from './graphql/RootApolloProvider';
+
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-    <Router>
-        <Switch>
-            <Container />
-        </Switch>
-    </Router>,
+    <RootApolloProvider>
+        <Router>
+            <Switch>
+                <Container/>
+            </Switch>
+        </Router>
+    </RootApolloProvider>,
     document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
