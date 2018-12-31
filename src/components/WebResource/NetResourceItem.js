@@ -10,7 +10,7 @@ import {getStore} from '../../api/util';
 import {netResource} from '../../api/graphql/WebResource.graphql';
 
 let paramsSearch = {
-    categoryId: getStore("categoryId"),
+    // categoryId: getStore("categoryId"),
     startTime: "",
     endTime: "",
     keyWord: ""
@@ -20,6 +20,18 @@ class NetResourceItem extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    handleDateChange = (date, dateString) => {
+        paramsSearch.startTime = dateString[0];
+        paramsSearch.endTime = dateString[1];
+
+        console.log(paramsSearch);
+
+
+        this.props.data.refetch({
+            variables: {...paramsSearch}
+        })
+    };
 
     render() {
         const Search = Input.Search;
@@ -34,7 +46,7 @@ class NetResourceItem extends React.Component {
         return (
             <div>
                 <span style={{padding: 16}}>起始日期:
-                 <RangePicker style={{padding: 8}} onChange={this.onChange}/>
+                 <RangePicker style={{padding: 8}} onChange={this.handleDateChange}/>
                 </span>
                 <span style={{padding: 16}}>资源搜索:
                 <Search
@@ -60,15 +72,14 @@ class NetResourceItem extends React.Component {
             </div>
         );
     }
-}
-;
+};
 
 export default compose(
     withApollo,
     graphql(netResource, {
         options: props => {
             return {
-                variables: {...paramsSearch}
+                variables: Object.assign({},{categoryId:getStore("categoryId")},{...paramsSearch})
             }
         }
     })

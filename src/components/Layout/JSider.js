@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Layout, Menu, Icon} from 'antd';
 
 import {Link} from "react-router-dom";
-import About from "../Common/About";
 
 const {
     Sider,
@@ -47,7 +46,7 @@ export default class JSider extends Component {
                     </Menu.Item>
 
                     <Menu.Item key="5">
-                        <Icon type="bar-chart"/>
+                        <Icon type="mail"/>
                         <Link to={"/About"} style={{display: "inline"}}>
                             关于本站
                         </Link>

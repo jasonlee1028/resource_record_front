@@ -1,0 +1,27 @@
+html,
+body {
+  font-family: Chinese Quote, -apple-system, BlinkMacSystemFont, Segoe UI,
+    PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica,
+    Arial, sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-width: 1024px;
+  margin: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  color: #314659;
+}
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+a {
+  text-decoration: none;
+}
+input{
+  -webkit-box-shadow:0 0 0 500px #fff inset;
+}

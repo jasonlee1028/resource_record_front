@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom';
 import {
     BrowserRouter as Router,
     Switch,
+    Route,
+    Redirect
 } from 'react-router-dom';
 
 import './assets/css/index.css';
 
+import Login from './components/Login/Login';
 import Container from './components/Container/Container';
 import RootApolloProvider from './graphql/RootApolloProvider';
+
+import { getStore } from './api/util'
 
 import * as serviceWorker from './serviceWorker';
 
@@ -16,7 +21,13 @@ ReactDOM.render(
     <RootApolloProvider>
         <Router>
             <Switch>
-                <Container/>
+                <Route path="/Login" component={Login} />
+                <Route
+                    path="/"
+                    render={() =>
+                        getStore("token") ? <Container /> : <Redirect to={"/Login"} />
+                    }
+                />
             </Switch>
         </Router>
     </RootApolloProvider>,
