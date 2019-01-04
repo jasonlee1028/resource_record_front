@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 
-export default class ResourceStatistic extends React.Component {
+import {resourceStatistic} from '../../api/graphql/WebResource.graphql';
+import {compose, graphql, withApollo} from "react-apollo";
+import {Spin} from "antd";
+
+class ResourceStatistic extends React.Component {
     constructor(props) {
         super(props);
     };
@@ -15,39 +19,31 @@ export default class ResourceStatistic extends React.Component {
             data:['资源个数']
         },
         xAxis: {
-            data: [
-                "Python资源",
-                "前端资源",
-                "分布式资源",
-                "网络协议",
-                "数据库相关",
-                "机器学习",
-                "博客网站",
-                "Linux系统",
-                "Java编程",
-                "爬虫相关",
-                "性能优化",
-                "Go编程",
-                "服务器",
-                "数据分析",
-                "GitHub",
-                "操作系统",
-                "面试",
-            ]
+            data: []
         },
         yAxis: {},
         series: [{
             name: '资源个数',
             type: 'bar',
-            data: [
-                5, 20, 36, 10, 10, 20, 18, 20,
-                10, 18, 28, 36, 16, 24, 19, 20,
-                28
-            ]
+            data: []
         }]
     };
 
     render() {
+
+        if (this.props.data.error) return null;
+        if (this.props.data.loading) return <Spin/>;
+
+        let xAxisData = [];
+        let seriesData = [];
+        let resourceStatistic = this.props.data.resourceStatistic;
+        resourceStatistic.map((value, key) => {
+            xAxisData.push(value.resourceCategoryName);
+            seriesData.push(value.resourceCount);
+        });
+
+        this.formatOption.xAxis.data = xAxisData;
+        this.formatOption.series[0].data = seriesData;
 
         return (
             <ReactEcharts
@@ -60,4 +56,10 @@ export default class ResourceStatistic extends React.Component {
         );
     }
 };
+
+
+export default compose(
+    withApollo,
+    graphql(resourceStatistic),
+)(ResourceStatistic);
 

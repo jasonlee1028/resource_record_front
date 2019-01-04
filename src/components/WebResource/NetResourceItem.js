@@ -10,7 +10,6 @@ import {getStore} from '../../api/util';
 import {netResource} from '../../api/graphql/WebResource.graphql';
 
 let paramsSearch = {
-    // categoryId: getStore("categoryId"),
     startTime: "",
     endTime: "",
     keyWord: ""
@@ -24,9 +23,6 @@ class NetResourceItem extends React.Component {
     handleDateChange = (date, dateString) => {
         paramsSearch.startTime = dateString[0];
         paramsSearch.endTime = dateString[1];
-
-        console.log(paramsSearch);
-
 
         this.props.data.refetch({
             variables: {...paramsSearch}
@@ -45,24 +41,30 @@ class NetResourceItem extends React.Component {
 
         return (
             <div>
-                <span style={{padding: 16}}>起始日期:
+                <div>
+                    <span style={{padding: 16}}>起始日期:
                  <RangePicker style={{padding: 8}} onChange={this.handleDateChange}/>
                 </span>
-                <span style={{padding: 16}}>资源搜索:
+                    <span style={{padding: 16}}>资源搜索:
                 <Search
                     placeholder="Python"
                     style={{padding: 8, width: 200}}
                     onSearch={value => console.log(value)}
                 />
                 </span>
-                <div style={{display: 'flex'}}>
+                </div>
+                <div style={{display: 'inline'}}>
                     {
                         netResourceList.map((value, key) => {
                         return (
                             <Card
+                                id={key}
                                 title={value.displayName}
                                 bordered={true}
-                                style={{width: 300, margin: 16}}>
+                                style={{
+                                    width: 240,
+                                    height: 160,
+                                    margin: 16, float: 'left', textAlign: 'center'}}>
                                 <p>{value.description}</p>
                                 <p><a target="_blank" href={value.url}>点我呀</a></p>
                             </Card>

@@ -8,6 +8,7 @@ import NetResource from '../components/WebResource/NetResource';
 import Original from '../components/WebResource/Original';
 import ResourceStatistics from '../components/WebResource/ResourceStatistics';
 import NetResourceItem from '../components/WebResource/NetResourceItem';
+import CreateNewResource from '../components/WebResource/CreateNewResource';
 
 const routes = () => (
     <div style={{height: "100%"}}>
@@ -16,6 +17,7 @@ const routes = () => (
         <Route path="/Original" component={Original}/>
         <Route path="/ResourceStatistics" component={ResourceStatistics}/>
         <Route path="/NetResourceItem/:id" component={NetResourceItem}/>
+        <Route path="/CreateNewResource" component={CreateNewResource}/>
         <Route path="/About" component={About}/>
     </div>
 );

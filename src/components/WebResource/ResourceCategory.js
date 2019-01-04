@@ -69,7 +69,10 @@ class ResourceCategory extends Component {
             <div style={{display: 'inline'}}>
                 {resourceCategoryList.map((value, key) => {
                     return (
-                        <Card style={{width: 240, margin: 16, float: 'left', textAlign: 'center'}} bodyStyle={{padding: 8}}>
+                        <Card
+                            id={key}
+                            style={{width: 240, margin: 16, float: 'left', textAlign: 'center'}}
+                            bodyStyle={{padding: 8}}>
                             <div className="custom-image">
                                 <img alt="example" style={{width:200, height: 100}}
                                      src={this.state.categoryImage[value.name]}/>

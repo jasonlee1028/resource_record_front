@@ -27,3 +27,23 @@ query netResource(
         url
     }
 }
+
+# 资源统计
+query resourceStatistic {
+    resourceStatistic {
+        resourceCategoryName
+        resourceCount
+    }
+}
+
+# 新增资源
+mutation CreateNetResourceOperation(
+        $newData: NewNetResourceData!
+){
+    createWebResource(
+        newData: $newData
+    )
+    {
+        ok
+    }
+}
