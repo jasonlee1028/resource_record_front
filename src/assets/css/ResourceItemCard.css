@@ -1,11 +1,10 @@
-.custom-image img {
-    display: block;
+.box {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.custom-card {
-    padding: 10px 16px;
-}
-
-.custom-card p {
-    color: #999;
+.card {
+    width: 240px;
+    margin: 16px;
+    text-align: center;
 }
