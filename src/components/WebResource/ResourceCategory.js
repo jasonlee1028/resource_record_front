@@ -4,6 +4,9 @@ import { withRouter } from "react-router-dom";
 
 import {setStore} from '../../api/util';
 import {compose, graphql, withApollo} from 'react-apollo';
+
+import styles from '../../assets/css/ResourceItemCard.css';
+
 import { resourceCategory } from '../../api/graphql/WebResource.graphql';
 
 import python from '../../assets/images/python.jpg';
@@ -66,18 +69,18 @@ class ResourceCategory extends Component {
         let resourceCategoryList = this.props.data.resourceCategory;
 
         return (
-            <div style={{display: 'inline'}}>
+            <div className={styles.box}>
                 {resourceCategoryList.map((value, key) => {
                     return (
                         <Card
                             id={key}
-                            style={{width: 240, margin: 16, float: 'left', textAlign: 'center'}}
+                            className={styles.card}
                             bodyStyle={{padding: 8}}>
-                            <div className="custom-image">
+                            <div>
                                 <img alt="example" style={{width:200, height: 100}}
                                      src={this.state.categoryImage[value.name]}/>
                             </div>
-                            <div className="custom-card">
+                            <div>
                                 <h3>{value.displayName}</h3>
                                 <a onClick={() => this.handleClickResourceCategory(value.id)}>点我呀</a>
                             </div>
