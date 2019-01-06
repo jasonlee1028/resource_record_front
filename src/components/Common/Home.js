@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-import App from '../../App';
 import ReactEcharts from "echarts-for-react";
 
 
@@ -112,12 +111,13 @@ var building2 = (function () {
 const option = {
     backgroundColor:"#000",
     title: {
-        text: '琪琪，我爱你，早日康复哦！',
-        top: 20,
+        text: "2019新年快乐",
+        top: 24,
         left: 'center',
         textStyle: {
-            fontSize: 20,
+            fontSize: 24,
             // fontStyle:'italic',
+            color: "#ee51d5",
             fontWeight: 'bold'
         }
     },
@@ -149,7 +149,8 @@ const option = {
         },
         axisLabel: {
             show: false
-        }
+        },
+        max: 200
     },
     series: [{
         type: 'bar',
@@ -850,7 +851,9 @@ class Home extends Component {
         return (
             <ReactEcharts
                 option={option}
-            />
+                style={{height:600}}
+            >
+            </ReactEcharts>
         );
     }
 }

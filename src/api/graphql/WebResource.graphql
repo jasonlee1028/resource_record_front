@@ -47,3 +47,43 @@ mutation CreateNetResourceOperation(
         ok
     }
 }
+
+
+# 个人原创资源类型
+query originalCategory {
+    originalCategory {
+        id
+        displayName
+    }
+}
+
+
+# 个人原创资源列表
+query originalResourceList(
+    $originalCategoryId: String!
+)
+{
+    originalResourceList(
+    originalCategoryId: $originalCategoryId
+    )
+    {
+        id
+        title
+        createTime
+  }
+}
+
+# 个人原创指定资源详情
+query originalResource(
+    $originalResourceId: String!
+    )
+    {
+        originalResource(
+            originalResourceId: $originalResourceId
+        )
+        {
+            title
+            content
+            createTime
+        }
+}
