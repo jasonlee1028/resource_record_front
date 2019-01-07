@@ -23,7 +23,6 @@ class OriginalNav extends React.Component {
 
 
     handleClick = (e) => {
-        console.log(1, e.key);
         this.setState({
             current: e.key,
         });

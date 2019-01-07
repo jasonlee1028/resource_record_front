@@ -16,7 +16,7 @@ const routes = () => (
         <Route path="/" exact component={Home}/>
         <Route path="/NetResource" component={NetResource}/>
         <Route path="/Original" component={Original}/>
-        <Route path="/OriginalArticle" component={OriginalArticle}/>
+        <Route path="/OriginalArticle/:id" component={OriginalArticle}/>
         <Route path="/ResourceStatistics" component={ResourceStatistics}/>
         <Route path="/NetResourceItem/:id" component={NetResourceItem}/>
         <Route path="/CreateNewResource" component={CreateNewResource}/>
