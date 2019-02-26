@@ -1,34 +1,33 @@
-import React from 'react';
+import React from "react";
 
-import {compose, graphql, withApollo} from 'react-apollo';
-import {withRouter} from "react-router-dom";
-import {Timeline, Spin} from "antd";
+import { compose, graphql, withApollo } from "react-apollo";
+import { withRouter } from "react-router-dom";
+import { Timeline, Spin } from "antd";
 
-import {originalResourceList} from "../../api/graphql/WebResource.graphql";
-import {getStore, setStore} from "../../api/util";
-
+import { originalResourceList } from "../../api/graphql/WebResource.graphql";
+import { getStore, setStore } from "../../api/util";
 
 class OriginalList extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    handleClickArticleTitle = (originalResourceId) => {
-
+    handleClickArticleTitle = originalResourceId => {
+        setStore("originalResourceId", originalResourceId);
         this.props.history.push({
             pathname: `/OriginalArticle/${originalResourceId}`
         });
-        setStore('originalResourceId', originalResourceId);
+
     };
 
     render() {
         if (this.props.data.error) return null;
-        if (this.props.data.loading) return <Spin/>;
+        if (this.props.data.loading) return <Spin />;
 
         let originalResourceList = this.props.data.originalResourceList;
 
         return (
-            <div style={{margin: 24}}>
+            <div style={{ margin: 24 }}>
                 <Timeline mode="alternate">
                     {/*<Timeline.Item*/}
                     {/*dot={<Icon type="clock-circle-o"*/}
@@ -37,32 +36,30 @@ class OriginalList extends React.Component {
                     {/*[2019-01-05]使用 GitHub 和 Python 实现持续部署*/}
                     {/*</Link>*/}
                     {/*</Timeline.Item>*/}
-                    {
-                        originalResourceList.map((value, key) => {
-                            return (
-                                <Timeline.Item
-                                    id={key}
-                                >
-                                    <a onClick={() => this.handleClickArticleTitle(value.id)}>
-                                        [{value.createTime}]{value.title}
-                                    </a>
-                                </Timeline.Item>
-                            )
-                        })
-                    }
+                    {originalResourceList.map((value, key) => {
+                        return (
+                            <Timeline.Item id={key} key={key}>
+                                <a onClick={() => this.handleClickArticleTitle(value.id)}>
+                                    [{value.createTime}]{value.title}
+                                </a>
+                            </Timeline.Item>
+                        );
+                    })}
                 </Timeline>
             </div>
         );
     }
-};
+}
 
 export default compose(
     withApollo,
     graphql(originalResourceList, {
-        options: {
-            variables: {
-                originalCategoryId: getStore('originalCategoryId')
-            }
+        options: props => {
+            return {
+                variables: {
+                    originalCategoryId: props.originalCategoryId
+                }
+            };
         }
-    }),
+    })
 )(withRouter(OriginalList));

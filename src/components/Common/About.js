@@ -5,28 +5,28 @@ import ReactEcharts from "echarts-for-react";
 
 var plantCap = [
     {
-        name: '温柔',
+        name: 'Python',
     },
     {
-        name: '可爱',
+        name: '爬虫',
     },
     {
-        name: '活泼',
+        name: '分布式',
     },
     {
-        name: '乐于助人',
+        name: '数据库',
     },
     {
-        name: '聪明',
+        name: 'Go',
     },
     {
-        name: '高智商',
+        name: '大数据',
     },
     {
-        name: '赌神',
+        name: 'Scala',
     },
     {
-        name: '前端大神',
+        name: '后端',
     }
 ];
 
@@ -107,7 +107,7 @@ for (var a = 0; a < plantCap.length; a++) {
 const option = {
     backgroundColor: '#f0f2f5',
     title: {
-        text: "这就是我的王老师...",
+        text: "",
         textStyle: {
             color: '#ff5ef8',
             fontSize: 24
@@ -163,12 +163,7 @@ class About extends Component {
     render() {
         return (
             <div style={{textAlign: "center", padding: 24}}>
-                <h2>感谢王老师的指导，没有王老师的指导就没有今天...</h2>
-                <h3>多年以后，每当有人问起，哟，你这网站做的这么好，都是跟谁学的呀...</h3>
-                <h3>然后，我总是会双眼饱含泪光，仰望星空，骄傲地回答道，是王老师...</h3>
-                <h3>此情此景，我相信那人一定会问，你的王老师是谁呀...</h3>
-                <h3>于是，我缓缓地拿起手中的旺仔牛奶，深情的喝了一口，回答道，请往下看：</h3>
-
+                <h2>个人资料记录网站，暂未完成，敬请期待...</h2>
                 <ReactEcharts
                     option={option}
                 >
